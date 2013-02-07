@@ -10,3 +10,8 @@
 
 +!start : true
 	<-	true.
+
+
++startTurn(N)
+	<-	.print("Signal received for start of Turn ",N);
+		action("cooperate").

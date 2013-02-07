@@ -25,15 +25,15 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 	public static final int D = 3; // outcome if both players defect
 
 	private final Map<AgentId, Integer> standings = new HashMap<AgentId, Integer>();
-	private final Map<AgentId, String> actions = new HashMap<AgentId, String>();
-
+	String actions[] = new String[2]; // 2 = number of agents
 	private final List<AgentId> order = new ArrayList<AgentId>();
 
 	@GAME_OPERATION(validator = "validateAction")
 	void action(String action) {
-		AgentId aid = getOpUserId();
+		AgentId aid = getOpUserId();	
 		System.out.println(aid + action + "s");
-		actions.put(aid, action);
+		int ord = order.indexOf(aid);
+		actions[ord] = action;
 	}
 
 	ValidationResult validateAction(String action) {
@@ -56,16 +56,15 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 		}
 	}
 
+	
 	@OPERATION
 	protected void registerAgent(OpFeedbackParam<String> wsp) {
 		super.registerAgent(wsp);
-
-		actions.put(getOpUserId(), null);
 		standings.put(getOpUserId(), 0);
 		order.add(getOpUserId());
-
 		wsp.set("NA");
 	}
+	
 	
 	@Override
     protected void doPostEvaluation() {
@@ -78,8 +77,8 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 	void evaluateActions() {
 		AgentId firstAid = order.get(0);
 		AgentId secondAid = order.get(1);
-		String first = actions.get(firstAid);
-		String second = actions.get(secondAid);
+		String first = actions[0];
+		String second = actions[1];
 		if (first.equals(second)) {
 			if (first.equals(DEFECT)) {
 				updateStandings(firstAid, D);
@@ -97,6 +96,7 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 				updateStandings(secondAid, B);
 			}
 		}
+		System.out.println("STANDINGS at end of iteration "+currentStep+" are: "+standings+"\n");
 		setPostEvaluationDone(true);
 	}
 
