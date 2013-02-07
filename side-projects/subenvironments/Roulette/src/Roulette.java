@@ -287,13 +287,13 @@ public class Roulette extends SimultaneouslyExecutedCoordinator {
 	}
 
 	/**
-	 * checks if a bet is winning and if so returns the payout for the agent if
-	 * the bet is losing it returns the negative of the bet sum value
+	 * Checks if a bet is winning and if so returns the payout for the agent if
+	 * the bet is losing it returns the negative of the bet sum value.
 	 * 
 	 * @param bet
-	 *            data structure created when the bet operation is invoked
-	 * @return minus the bet sum if the bet is lost or the payout if the bet is
-	 *         won
+	 *            Data structure created when the bet operation is invoked.
+	 * @return Minus the bet sum if the bet is lost or the payout if the bet is
+	 *         won.
 	 */
 	double computePayoffForPlayer(final Bet bet) {
 		String betType = bet.getType();

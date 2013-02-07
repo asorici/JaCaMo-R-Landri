@@ -66,6 +66,13 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 
 		wsp.set("NA");
 	}
+	
+	@Override
+    protected void doPostEvaluation() {
+        for (AgentId aid : masterAgents.getAgentIds()) {
+            signal(aid, "canEvaluate", currentStep);
+        }
+    }
 
 	@MASTER_OPERATION(validator = "validateEvaluateActions")
 	void evaluateActions() {
