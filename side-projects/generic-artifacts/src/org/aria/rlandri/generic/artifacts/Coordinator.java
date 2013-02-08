@@ -306,8 +306,10 @@ public abstract class Coordinator extends Artifact {
 	 *            the new state of the coordinator
 	 */
 	public void setState(EnvStatus state) {
+	    /*
 		System.err.println(String.format("changed state from %s to %s",
 				this.state, state));
+		*/
 		this.state = state;
 	}
 

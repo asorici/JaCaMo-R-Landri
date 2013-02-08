@@ -17,12 +17,12 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 	public static final String DEFECT = "defect";
 	public static final String COOPERATE = "cooperate";
 
-	public static final int A = 1; // outcome if both players cooperate
+	public static final int A = 3; // outcome if both players cooperate
 	public static final int B = 0; // outcome for the defecting player if the
 									// other cooperates
-	public static final int C = 12; // outcome for the cooperating player if the
+	public static final int C = 5; // outcome for the cooperating player if the
 									// other defects
-	public static final int D = 3; // outcome if both players defect
+	public static final int D = 1; // outcome if both players defect
 
 	private final Map<AgentId, Integer> standings = new HashMap<AgentId, Integer>();
 	String actions[] = new String[2]; // 2 = number of agents
@@ -96,7 +96,8 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 				updateStandings(secondAid, B);
 			}
 		}
-		System.out.println("STANDINGS at end of iteration "+currentStep+" are: "+standings+"\n");
+		System.out.println("Player 1 score: " + standings.get(firstAid)/currentStep);
+		System.out.println("Player 2 score: " + standings.get(secondAid)/currentStep);
 		setPostEvaluationDone(true);
 	}
 

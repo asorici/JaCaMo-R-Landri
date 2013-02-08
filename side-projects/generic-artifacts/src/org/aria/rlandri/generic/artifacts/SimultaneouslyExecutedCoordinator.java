@@ -51,13 +51,17 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 	}
 
 	public boolean waitForEndTurn() {
+	    /*
 		System.err.println(String.format("%s: waiting for the end of turn %s",
 				getOpUserId(), currentStep));
+	    */
 		leaveNoAgentBehind();
+		/*
 		System.err.println(String.format(
 				"%s: every agent has submitted its action", getOpUserId()));
+		*/
 		await("checkTurn", getOpUserId());
-		System.err.println(String.format("%s: kill the bugs", getOpUserId()));
+		//System.err.println(String.format("%s: kill the bugs", getOpUserId()));
 		if (executingAgentIterator.hasNext()) {
 			executingAgent = executingAgentIterator.next();
 			return false;
@@ -127,9 +131,11 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 	private void leaveNoAgentBehind() {
 		readyAgents.add(getOpUserId());
 		if (isEverybodyReady()) {
+		    /*
 			System.err.println(String.format(
 					"Submitting is over!!! remaining(%s)",
 					task.scheduledExecutionTime() - new Date().getTime()));
+					*/
 			if (prepareEvaluation()) {
 				// TODO this can be skipped if it's this agent's turn!
 				execInternalOp("wakerOfAgents");
@@ -154,7 +160,7 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 			executingAgent = executingAgentIterator.next();
 			return true;
 		} else {
-			System.err.println("WOP WOP WOP WOP");
+			//System.err.println("WOP WOP WOP WOP");
 			resetTurnInfo();
 			return false;
 		}
@@ -162,8 +168,10 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 
 	private void resetTask() {
 		boolean cancelled = task.cancel();
+		/*
 		System.err.println(String.format("Cancellation has%s succeeded",
 				cancelled ? "" : " not"));
+	    */
 		task = null;
 	}
 
@@ -177,7 +185,7 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 		setState(EnvStatus.RUNNING);
 		stepFinished = false;
 		final long startTime = new Date().getTime();
-		System.err.println("PRIME: The task was scheduled at " + startTime);
+		//System.err.println("PRIME: The task was scheduled at " + startTime);
 		task = new TimerTask() {
 			public void run() {
 				String errFmt = "The task scheduled at %s was run at %s (diff=%s)";
@@ -217,7 +225,7 @@ public abstract class SimultaneouslyExecutedCoordinator extends Coordinator {
 
 	@INTERNAL_OPERATION
 	private void wakerOfAgents() {
-		System.err.println("DID YOU PAY THE IRON PRICE FOR IT OR THE GOLD?");
+		//System.err.println("DID YOU PAY THE IRON PRICE FOR IT OR THE GOLD?");
 	}
 
 	@INTERNAL_OPERATION
