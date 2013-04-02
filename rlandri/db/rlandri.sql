@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5deb1
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2012 at 11:49 AM
--- Server version: 5.1.63
--- PHP Version: 5.3.6-13ubuntu3.8
+-- Generation Time: Apr 02, 2013 at 11:18 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -159,8 +159,8 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 
 INSERT INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
 (1, 'admin', '', '', 'popa.tiberiu@gmail.com', 'pbkdf2_sha256$10000$Pel4TDYzKAof$zawDS1r9uzj0ZkO/N17caDtFPsDFwcLo9unbfJVXTlU=', 1, 1, 1, '2012-07-19 11:38:57', '2012-07-12 11:13:16'),
-(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2012-07-27 08:41:37', '2012-07-12 11:14:25'),
-(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2012-07-19 10:52:46', '2012-07-12 11:14:40'),
+(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2013-04-01 18:43:06', '2012-07-12 11:14:25'),
+(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2013-04-02 10:53:14', '2012-07-12 11:14:40'),
 (4, 'mihai', '', '', '', 'pbkdf2_sha256$10000$Ac6AXMUmTKvR$EyJJuVXpvAAq/6hPqgufSiTLweRfKQPSvoJHuvVDVbA=', 0, 1, 0, '2012-07-19 15:42:44', '2012-07-12 11:14:46');
 
 -- --------------------------------------------------------
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   PRIMARY KEY (`id`),
   KEY `django_admin_log_403f60f` (`user_id`),
   KEY `django_admin_log_1bb8f392` (`content_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -319,7 +319,9 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('d27b4929eb9b063693a3029c2412e6f0', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-08-10 08:41:38');
+('d27b4929eb9b063693a3029c2412e6f0', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-08-10 08:41:38'),
+('e0egq6p1h8633bibza0h3lwkal9bmvta', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==', '2013-04-15 14:57:22'),
+('vs01riy5ascgweoicdahfptdthyp6cbh', 'MTVlM2MwNGM0YzQ0Y2UxYWQ5MmNiZjlkNTZjZmI4MDMyNjFiZTVjYTqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQSKAQN1Lg==', '2013-04-16 10:53:14');
 
 -- --------------------------------------------------------
 
@@ -424,14 +426,14 @@ CREATE TABLE IF NOT EXISTS `simulator_abstractprocess` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `simulator_abstractprocess_6c4d8baf` (`solution_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `simulator_abstractprocess`
 --
 
 INSERT INTO `simulator_abstractprocess` (`id`, `solution_id`, `created`) VALUES
-(1, 1, '2012-07-27 08:43:23');
+(45, 12, '2013-04-02 11:15:51');
 
 -- --------------------------------------------------------
 
@@ -453,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `solution_solution` (
   PRIMARY KEY (`id`),
   KEY `solution_solution_75b32dfd` (`envUser_id`),
   KEY `solution_solution_e004a33` (`subEnvironment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `solution_solution`
@@ -464,7 +466,10 @@ INSERT INTO `solution_solution` (`id`, `name`, `envUser_id`, `subEnvironment_id`
 (2, 'Auction solution', 4, 3, 'DA-MI HOTELU', 1, 'users/4/solutions/3/auction_solution_agents.zip', '', '', '2012-07-13 10:38:01'),
 (4, 'Factorial', 4, 2, 'Trivial computation!', 1, 'users/4/solutions/2/factorial_solution_agents.zip', '', '', '2012-07-13 10:56:26'),
 (5, 'sail', 2, 4, 'description', 1, 'users/2/solutions/4/roulette_feedback_solution_agents.zip', '', '', '2012-07-19 10:55:12'),
-(6, 'Toer', 2, 5, 'Really dumb agent for TicTacToe!', 1, 'users/2/solutions/5/tictactoe_solution_agents.zip', '', '', '2012-07-19 11:42:36');
+(6, 'Toer', 2, 5, 'Really dumb agent for TicTacToe!', 1, 'users/2/solutions/5/tictactoe_solution_agents.zip', '', '', '2012-07-19 11:42:36'),
+(7, 'sol noua', 2, 1, 'solutie ', 1, 'users/2/solutions/1/roulette_solution_agents_1.zip', '', '', '2013-04-01 15:14:52'),
+(11, 'extortion', 3, 6, 'sol', 0, 'users/3/solutions/6/iterated_prisoner_dilemma_solution_agents.zip', '', '', '2013-04-01 19:39:25'),
+(12, 'fix', 3, 6, 'fix', 0, 'users/3/solutions/6/iterated_prisoner_dilemma_solution_agents.zip', '', '', '2013-04-01 19:56:50');
 
 -- --------------------------------------------------------
 
@@ -479,7 +484,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
   `file` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `subenvironment_agent_4d5c45ed` (`subenvironment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `subenvironment_agent`
@@ -487,7 +492,8 @@ CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
 
 INSERT INTO `subenvironment_agent` (`id`, `name`, `subenvironment_id`, `file`) VALUES
 (1, 'Roulette Master', 1, 'subenvironments/1/agents/roulette_master_agents.zip'),
-(2, 'Roulette Feedback Master', 4, 'subenvironments/4/agents/roulette_feedback_master_agents.zip');
+(2, 'Roulette Feedback Master', 4, 'subenvironments/4/agents/roulette_feedback_master_agents.zip'),
+(3, 'IPD Master', 6, 'subenvironments/6/agents/iterated_prisoner_dilemma_master_agents.zip');
 
 -- --------------------------------------------------------
 
@@ -502,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_artifact` (
   `file` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `subenvironment_artifact_4d5c45ed` (`subenvironment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `subenvironment_artifact`
@@ -513,7 +519,8 @@ INSERT INTO `subenvironment_artifact` (`id`, `name`, `subenvironment_id`, `file`
 (2, 'Factorial', 2, 'subenvironments/2/artifacts/factorial_artifacts.zip'),
 (3, 'Auction', 3, 'subenvironments/3/artifacts/auction_artifacts.zip'),
 (6, 'Feedback Artifacts', 4, 'subenvironments/4/artifacts/roulette_feedback_artifacts.zip'),
-(7, 'TicTac Artifacts', 5, 'subenvironments/5/artifacts/tictactoe_artifacts.zip');
+(7, 'TicTac Artifacts', 5, 'subenvironments/5/artifacts/tictactoe_artifacts.zip'),
+(8, 'IPD Artifacts', 6, 'subenvironments/6/artifacts/iterated_prisoner_dilemma_artifacts.zip');
 
 -- --------------------------------------------------------
 
@@ -566,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_ownerrelationship` (
   PRIMARY KEY (`id`),
   KEY `subenvironment_ownerrelationship_e004a33` (`subEnvironment_id`),
   KEY `subenvironment_ownerrelationship_75b32dfd` (`envUser_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `subenvironment_ownerrelationship`
@@ -579,7 +586,8 @@ INSERT INTO `subenvironment_ownerrelationship` (`id`, `subEnvironment_id`, `envU
 (4, 4, 4, 100),
 (5, 5, 3, 298),
 (6, 5, 2, 1),
-(7, 5, 4, 1);
+(7, 5, 4, 1),
+(8, 6, 3, 100);
 
 -- --------------------------------------------------------
 
@@ -598,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_subenvironment` (
   `numSteps` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `subenvironment_subenvironment_77550576` (`ring_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `subenvironment_subenvironment`
@@ -609,7 +617,8 @@ INSERT INTO `subenvironment_subenvironment` (`id`, `name`, `description`, `ring_
 (2, 'Factorial', 'Subenvironment pentru oamenii limitati din punct de vedere mental', 3, 1, 'rtsp', 'Factorial', NULL),
 (3, 'Auction', 'You must buy hotel Cismigiu', 3, 2, 'rtmp', 'Auction', NULL),
 (4, 'Roulette Feedback', 'Roulette with instant feedback after bet', 2, 2, 'setb', 'RouletteFeedback', 2),
-(5, 'TicTacToe', 'The glorious game of TicTacToe.', 3, 6, 'patb', 'TicTacToe', 5);
+(5, 'TicTacToe', 'The glorious game of TicTacToe.', 3, 6, 'patb', 'TicTacToe', 5),
+(6, 'Iterated Prisoner''s Dilemma', 'Iterated Prisoner''s Dilemma Subenvironment', 3, 4, 'setb', 'IteratedPrisonerDilemma', 50);
 
 --
 -- Constraints for dumped tables

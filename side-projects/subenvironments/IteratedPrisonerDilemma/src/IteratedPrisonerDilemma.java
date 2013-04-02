@@ -30,7 +30,7 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 
 	@GAME_OPERATION(validator = "validateAction")
 	void action(String action) {
-		AgentId aid = getOpUserId();	
+		AgentId aid = getOpUserId();
 		System.out.println(aid + action + "s");
 		int ord = order.indexOf(aid);
 		actions[ord] = action;
@@ -56,7 +56,6 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 		}
 	}
 
-	
 	@OPERATION
 	protected void registerAgent(OpFeedbackParam<String> wsp) {
 		super.registerAgent(wsp);
@@ -64,17 +63,20 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 		order.add(getOpUserId());
 		wsp.set("NA");
 	}
-	
-	
+
 	@Override
-    protected void doPostEvaluation() {
-        for (AgentId aid : masterAgents.getAgentIds()) {
-            signal(aid, "canEvaluate", currentStep);
-        }
-    }
+	protected void doPostEvaluation() {
+		for (AgentId aid : masterAgents.getAgentIds()) {
+			signal(aid, "canEvaluate", currentStep);
+		}
+	}
 
 	@MASTER_OPERATION(validator = "validateEvaluateActions")
 	void evaluateActions() {
+
+		String firstAgentResult = "";
+		String secondAgentResult = "";
+
 		AgentId firstAid = order.get(0);
 		AgentId secondAid = order.get(1);
 		String first = actions[0];
@@ -83,21 +85,34 @@ public class IteratedPrisonerDilemma extends SimultaneouslyExecutedCoordinator {
 			if (first.equals(DEFECT)) {
 				updateStandings(firstAid, D);
 				updateStandings(secondAid, D);
+				firstAgentResult = secondAgentResult = "D";
 			} else {
 				updateStandings(firstAid, A);
 				updateStandings(secondAid, A);
+				firstAgentResult = secondAgentResult = "C";
 			}
 		} else {
 			if (first.equals(DEFECT)) {
-				updateStandings(firstAid, B);
-				updateStandings(secondAid, C);
-			} else {
 				updateStandings(firstAid, C);
 				updateStandings(secondAid, B);
+				firstAgentResult = "T";
+				secondAgentResult = "S";
+			} else {
+				updateStandings(firstAid, B);
+				updateStandings(secondAid, C);
+				firstAgentResult = "S";
+				secondAgentResult = "T";
 			}
 		}
-		System.out.println("Player 1 score: " + standings.get(firstAid)/currentStep);
-		System.out.println("Player 2 score: " + standings.get(secondAid)/currentStep);
+		signal(firstAid, "result", currentStep, firstAgentResult);
+		signal(secondAid, "result", currentStep, secondAgentResult);
+		System.out
+				.println(firstAid + " score after " + currentStep
+						+ " turns is " + (double) standings.get(firstAid)
+						/ currentStep);
+		System.out.println(secondAid + " score after " + currentStep
+				+ " turns is " + (double) standings.get(secondAid)
+				/ currentStep);
 		setPostEvaluationDone(true);
 	}
 
