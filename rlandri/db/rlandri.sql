@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 02, 2013 at 11:18 AM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Gazda: 127.0.0.1
+-- Timp de generare: 11 Apr 2013 la 14:06
+-- Versiune server: 5.5.16
+-- Versiune PHP: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `rlandri`
+-- Baza de date: `rlandri`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_group`
+-- Structura de tabel pentru tabelul `auth_group`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_group` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_group_permissions`
+-- Structura de tabel pentru tabelul `auth_group_permissions`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_permission`
+-- Structura de tabel pentru tabelul `auth_permission`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_permission` (
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
--- Dumping data for table `auth_permission`
+-- Salvarea datelor din tabel `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
@@ -134,7 +134,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_user`
+-- Structura de tabel pentru tabelul `auth_user`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_user` (
@@ -154,19 +154,19 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `auth_user`
+-- Salvarea datelor din tabel `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
-(1, 'admin', '', '', 'popa.tiberiu@gmail.com', 'pbkdf2_sha256$10000$Pel4TDYzKAof$zawDS1r9uzj0ZkO/N17caDtFPsDFwcLo9unbfJVXTlU=', 1, 1, 1, '2012-07-19 11:38:57', '2012-07-12 11:13:16'),
-(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2013-04-01 18:43:06', '2012-07-12 11:14:25'),
-(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2013-04-02 10:53:14', '2012-07-12 11:14:40'),
-(4, 'mihai', '', '', '', 'pbkdf2_sha256$10000$Ac6AXMUmTKvR$EyJJuVXpvAAq/6hPqgufSiTLweRfKQPSvoJHuvVDVbA=', 0, 1, 0, '2012-07-19 15:42:44', '2012-07-12 11:14:46');
+(1, 'admin', '', '', 'popa.tiberiu@gmail.com', 'pbkdf2_sha256$10000$TYcolTXv5TOb$AyS/4V7xwQ3lvojxnCkQd7i+Tsntwy3lO3oGSgQ5Hj0=', 1, 1, 1, '2013-04-11 11:57:54', '2012-07-12 11:13:16'),
+(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2013-02-07 09:19:31', '2012-07-12 11:14:25'),
+(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2013-02-07 09:19:43', '2012-07-12 11:14:40'),
+(4, 'mihai', '', '', '', 'pbkdf2_sha256$10000$Ac6AXMUmTKvR$EyJJuVXpvAAq/6hPqgufSiTLweRfKQPSvoJHuvVDVbA=', 0, 1, 0, '2012-07-26 21:14:53', '2012-07-12 11:14:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_user_groups`
+-- Structura de tabel pentru tabelul `auth_user_groups`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_user_groups` (
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `auth_user_groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_user_user_permissions`
+-- Structura de tabel pentru tabelul `auth_user_user_permissions`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city_city`
+-- Structura de tabel pentru tabelul `city_city`
 --
 
 CREATE TABLE IF NOT EXISTS `city_city` (
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `city_city` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `city_city`
+-- Salvarea datelor din tabel `city_city`
 --
 
 INSERT INTO `city_city` (`id`, `name`, `description`) VALUES
@@ -218,7 +218,7 @@ INSERT INTO `city_city` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city_ring`
+-- Structura de tabel pentru tabelul `city_ring`
 --
 
 CREATE TABLE IF NOT EXISTS `city_ring` (
@@ -231,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `city_ring` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `city_ring`
+-- Salvarea datelor din tabel `city_ring`
 --
 
 INSERT INTO `city_ring` (`id`, `city_id`, `index`, `size`) VALUES
@@ -242,7 +242,7 @@ INSERT INTO `city_ring` (`id`, `city_id`, `index`, `size`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `django_admin_log`
+-- Structura de tabel pentru tabelul `django_admin_log`
 --
 
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `django_content_type`
+-- Structura de tabel pentru tabelul `django_content_type`
 --
 
 CREATE TABLE IF NOT EXISTS `django_content_type` (
@@ -275,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Dumping data for table `django_content_type`
+-- Salvarea datelor din tabel `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `name`, `app_label`, `model`) VALUES
@@ -303,7 +303,7 @@ INSERT INTO `django_content_type` (`id`, `name`, `app_label`, `model`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `django_session`
+-- Structura de tabel pentru tabelul `django_session`
 --
 
 CREATE TABLE IF NOT EXISTS `django_session` (
@@ -315,18 +315,19 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `django_session`
+-- Salvarea datelor din tabel `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('d27b4929eb9b063693a3029c2412e6f0', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-08-10 08:41:38'),
-('e0egq6p1h8633bibza0h3lwkal9bmvta', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==', '2013-04-15 14:57:22'),
-('vs01riy5ascgweoicdahfptdthyp6cbh', 'MTVlM2MwNGM0YzQ0Y2UxYWQ5MmNiZjlkNTZjZmI4MDMyNjFiZTVjYTqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQSKAQN1Lg==', '2013-04-16 10:53:14');
+('0305f91d962a32c7db201aab5b0479c0', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-09-30 13:56:55'),
+('0b014a2378d2641580d3f7c5d34fdf4e', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-08-19 19:17:54'),
+('650eb530def73bf9dda692173a7ddb50', 'N2RjY2UwOTYxNTQ3OThlMWY1YjAyZWJlMGQyZWI2YjYyYzYzMmM3OTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2013-04-25 11:57:54'),
+('6525b83b8a7f28eccc91f99befb478cb', 'MTVlM2MwNGM0YzQ0Y2UxYWQ5MmNiZjlkNTZjZmI4MDMyNjFiZTVjYTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQN1Lg==\n', '2013-02-21 09:19:43');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `django_site`
+-- Structura de tabel pentru tabelul `django_site`
 --
 
 CREATE TABLE IF NOT EXISTS `django_site` (
@@ -337,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `django_site` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `django_site`
+-- Salvarea datelor din tabel `django_site`
 --
 
 INSERT INTO `django_site` (`id`, `domain`, `name`) VALUES
@@ -346,7 +347,7 @@ INSERT INTO `django_site` (`id`, `domain`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `envuser_envagent`
+-- Structura de tabel pentru tabelul `envuser_envagent`
 --
 
 CREATE TABLE IF NOT EXISTS `envuser_envagent` (
@@ -361,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `envuser_envagent` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `envuser_envagent`
+-- Salvarea datelor din tabel `envuser_envagent`
 --
 
 INSERT INTO `envuser_envagent` (`id`, `name`, `envUser_id`, `location_id`, `timePool`) VALUES
@@ -377,7 +378,7 @@ INSERT INTO `envuser_envagent` (`id`, `name`, `envUser_id`, `location_id`, `time
 -- --------------------------------------------------------
 
 --
--- Table structure for table `envuser_envuser`
+-- Structura de tabel pentru tabelul `envuser_envuser`
 --
 
 CREATE TABLE IF NOT EXISTS `envuser_envuser` (
@@ -390,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `envuser_envuser` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `envuser_envuser`
+-- Salvarea datelor din tabel `envuser_envuser`
 --
 
 INSERT INTO `envuser_envuser` (`id`, `rank`, `economy`, `user_id`) VALUES
@@ -401,7 +402,7 @@ INSERT INTO `envuser_envuser` (`id`, `rank`, `economy`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule_schedule`
+-- Structura de tabel pentru tabelul `schedule_schedule`
 --
 
 CREATE TABLE IF NOT EXISTS `schedule_schedule` (
@@ -417,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `schedule_schedule` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simulator_abstractprocess`
+-- Structura de tabel pentru tabelul `simulator_abstractprocess`
 --
 
 CREATE TABLE IF NOT EXISTS `simulator_abstractprocess` (
@@ -426,19 +427,19 @@ CREATE TABLE IF NOT EXISTS `simulator_abstractprocess` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `simulator_abstractprocess_6c4d8baf` (`solution_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
--- Dumping data for table `simulator_abstractprocess`
+-- Salvarea datelor din tabel `simulator_abstractprocess`
 --
 
 INSERT INTO `simulator_abstractprocess` (`id`, `solution_id`, `created`) VALUES
-(45, 12, '2013-04-02 11:15:51');
+(50, 12, '2013-02-08 09:12:33');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solution_solution`
+-- Structura de tabel pentru tabelul `solution_solution`
 --
 
 CREATE TABLE IF NOT EXISTS `solution_solution` (
@@ -458,7 +459,7 @@ CREATE TABLE IF NOT EXISTS `solution_solution` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `solution_solution`
+-- Salvarea datelor din tabel `solution_solution`
 --
 
 INSERT INTO `solution_solution` (`id`, `name`, `envUser_id`, `subEnvironment_id`, `description`, `isVisible`, `agents`, `artifacts`, `organizations`, `lastModified`) VALUES
@@ -467,14 +468,12 @@ INSERT INTO `solution_solution` (`id`, `name`, `envUser_id`, `subEnvironment_id`
 (4, 'Factorial', 4, 2, 'Trivial computation!', 1, 'users/4/solutions/2/factorial_solution_agents.zip', '', '', '2012-07-13 10:56:26'),
 (5, 'sail', 2, 4, 'description', 1, 'users/2/solutions/4/roulette_feedback_solution_agents.zip', '', '', '2012-07-19 10:55:12'),
 (6, 'Toer', 2, 5, 'Really dumb agent for TicTacToe!', 1, 'users/2/solutions/5/tictactoe_solution_agents.zip', '', '', '2012-07-19 11:42:36'),
-(7, 'sol noua', 2, 1, 'solutie ', 1, 'users/2/solutions/1/roulette_solution_agents_1.zip', '', '', '2013-04-01 15:14:52'),
-(11, 'extortion', 3, 6, 'sol', 0, 'users/3/solutions/6/iterated_prisoner_dilemma_solution_agents.zip', '', '', '2013-04-01 19:39:25'),
-(12, 'fix', 3, 6, 'fix', 0, 'users/3/solutions/6/iterated_prisoner_dilemma_solution_agents.zip', '', '', '2013-04-01 19:56:50');
+(12, 'compare1', 3, 6, 'tit for tat vs extortionist', 0, 'users/3/solutions/6/compare1_1.zip', '', '', '2013-02-08 09:08:09');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_agent`
+-- Structura de tabel pentru tabelul `subenvironment_agent`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
@@ -487,18 +486,18 @@ CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `subenvironment_agent`
+-- Salvarea datelor din tabel `subenvironment_agent`
 --
 
 INSERT INTO `subenvironment_agent` (`id`, `name`, `subenvironment_id`, `file`) VALUES
 (1, 'Roulette Master', 1, 'subenvironments/1/agents/roulette_master_agents.zip'),
 (2, 'Roulette Feedback Master', 4, 'subenvironments/4/agents/roulette_feedback_master_agents.zip'),
-(3, 'IPD Master', 6, 'subenvironments/6/agents/iterated_prisoner_dilemma_master_agents.zip');
+(3, 'Iterated Prisoner s Dilemma Master', 6, 'subenvironments\\6\\agents\\iterated_prisoner_dilemma_master_agents.zip');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_artifact`
+-- Structura de tabel pentru tabelul `subenvironment_artifact`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_artifact` (
@@ -511,7 +510,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_artifact` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `subenvironment_artifact`
+-- Salvarea datelor din tabel `subenvironment_artifact`
 --
 
 INSERT INTO `subenvironment_artifact` (`id`, `name`, `subenvironment_id`, `file`) VALUES
@@ -520,12 +519,12 @@ INSERT INTO `subenvironment_artifact` (`id`, `name`, `subenvironment_id`, `file`
 (3, 'Auction', 3, 'subenvironments/3/artifacts/auction_artifacts.zip'),
 (6, 'Feedback Artifacts', 4, 'subenvironments/4/artifacts/roulette_feedback_artifacts.zip'),
 (7, 'TicTac Artifacts', 5, 'subenvironments/5/artifacts/tictactoe_artifacts.zip'),
-(8, 'IPD Artifacts', 6, 'subenvironments/6/artifacts/iterated_prisoner_dilemma_artifacts.zip');
+(8, 'Iterated Prisoner s Dilemma Artifacts', 6, 'subenvironments\\6\\artifacts\\iterated_prisoner_dilemma_artifacts.zip');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_defaultextra`
+-- Structura de tabel pentru tabelul `subenvironment_defaultextra`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_defaultextra` (
@@ -536,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_defaultextra` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `subenvironment_defaultextra`
+-- Salvarea datelor din tabel `subenvironment_defaultextra`
 --
 
 INSERT INTO `subenvironment_defaultextra` (`id`, `name`, `file`) VALUES
@@ -547,7 +546,7 @@ INSERT INTO `subenvironment_defaultextra` (`id`, `name`, `file`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_organization`
+-- Structura de tabel pentru tabelul `subenvironment_organization`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_organization` (
@@ -562,7 +561,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_organization` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_ownerrelationship`
+-- Structura de tabel pentru tabelul `subenvironment_ownerrelationship`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_ownerrelationship` (
@@ -576,7 +575,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_ownerrelationship` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `subenvironment_ownerrelationship`
+-- Salvarea datelor din tabel `subenvironment_ownerrelationship`
 --
 
 INSERT INTO `subenvironment_ownerrelationship` (`id`, `subEnvironment_id`, `envUser_id`, `shares`) VALUES
@@ -592,7 +591,7 @@ INSERT INTO `subenvironment_ownerrelationship` (`id`, `subEnvironment_id`, `envU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subenvironment_subenvironment`
+-- Structura de tabel pentru tabelul `subenvironment_subenvironment`
 --
 
 CREATE TABLE IF NOT EXISTS `subenvironment_subenvironment` (
@@ -609,7 +608,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_subenvironment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `subenvironment_subenvironment`
+-- Salvarea datelor din tabel `subenvironment_subenvironment`
 --
 
 INSERT INTO `subenvironment_subenvironment` (`id`, `name`, `description`, `ring_id`, `index`, `envType`, `coordinatorClass`, `numSteps`) VALUES
@@ -618,111 +617,111 @@ INSERT INTO `subenvironment_subenvironment` (`id`, `name`, `description`, `ring_
 (3, 'Auction', 'You must buy hotel Cismigiu', 3, 2, 'rtmp', 'Auction', NULL),
 (4, 'Roulette Feedback', 'Roulette with instant feedback after bet', 2, 2, 'setb', 'RouletteFeedback', 2),
 (5, 'TicTacToe', 'The glorious game of TicTacToe.', 3, 6, 'patb', 'TicTacToe', 5),
-(6, 'Iterated Prisoner''s Dilemma', 'Iterated Prisoner''s Dilemma Subenvironment', 3, 4, 'setb', 'IteratedPrisonerDilemma', 50);
+(6, 'Iterated Prisoner''s Dilemma', 'Will you cooperate or will you defect?', 2, 4, 'setb', 'IteratedPrisonerDilemma', 20);
 
 --
--- Constraints for dumped tables
+-- Restrictii pentru tabele sterse
 --
 
 --
--- Constraints for table `auth_group_permissions`
+-- Restrictii pentru tabele `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD CONSTRAINT `group_id_refs_id_3cea63fe` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   ADD CONSTRAINT `permission_id_refs_id_5886d21f` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
 
 --
--- Constraints for table `auth_permission`
+-- Restrictii pentru tabele `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD CONSTRAINT `content_type_id_refs_id_728de91f` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Constraints for table `auth_user_groups`
+-- Restrictii pentru tabele `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
   ADD CONSTRAINT `group_id_refs_id_f116770` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   ADD CONSTRAINT `user_id_refs_id_7ceef80f` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Constraints for table `auth_user_user_permissions`
+-- Restrictii pentru tabele `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `permission_id_refs_id_67e79cb` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `user_id_refs_id_dfbab7d` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Constraints for table `city_ring`
+-- Restrictii pentru tabele `city_ring`
 --
 ALTER TABLE `city_ring`
   ADD CONSTRAINT `city_id_refs_id_1da26b18` FOREIGN KEY (`city_id`) REFERENCES `city_city` (`id`);
 
 --
--- Constraints for table `django_admin_log`
+-- Restrictii pentru tabele `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `content_type_id_refs_id_288599e6` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   ADD CONSTRAINT `user_id_refs_id_c8665aa` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Constraints for table `envuser_envagent`
+-- Restrictii pentru tabele `envuser_envagent`
 --
 ALTER TABLE `envuser_envagent`
   ADD CONSTRAINT `envUser_id_refs_id_215320fa` FOREIGN KEY (`envUser_id`) REFERENCES `envuser_envuser` (`id`),
   ADD CONSTRAINT `location_id_refs_id_3357fab0` FOREIGN KEY (`location_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `envuser_envuser`
+-- Restrictii pentru tabele `envuser_envuser`
 --
 ALTER TABLE `envuser_envuser`
   ADD CONSTRAINT `user_id_refs_id_48bb7f82` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Constraints for table `schedule_schedule`
+-- Restrictii pentru tabele `schedule_schedule`
 --
 ALTER TABLE `schedule_schedule`
   ADD CONSTRAINT `solution_id_refs_id_5cb40c7` FOREIGN KEY (`solution_id`) REFERENCES `solution_solution` (`id`);
 
 --
--- Constraints for table `simulator_abstractprocess`
+-- Restrictii pentru tabele `simulator_abstractprocess`
 --
 ALTER TABLE `simulator_abstractprocess`
   ADD CONSTRAINT `solution_id_refs_id_68a5c410` FOREIGN KEY (`solution_id`) REFERENCES `solution_solution` (`id`);
 
 --
--- Constraints for table `solution_solution`
+-- Restrictii pentru tabele `solution_solution`
 --
 ALTER TABLE `solution_solution`
   ADD CONSTRAINT `envUser_id_refs_id_7d140cb` FOREIGN KEY (`envUser_id`) REFERENCES `envuser_envuser` (`id`),
   ADD CONSTRAINT `subEnvironment_id_refs_id_110e3a39` FOREIGN KEY (`subEnvironment_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `subenvironment_agent`
+-- Restrictii pentru tabele `subenvironment_agent`
 --
 ALTER TABLE `subenvironment_agent`
   ADD CONSTRAINT `subenvironment_id_refs_id_2e3d8414` FOREIGN KEY (`subenvironment_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `subenvironment_artifact`
+-- Restrictii pentru tabele `subenvironment_artifact`
 --
 ALTER TABLE `subenvironment_artifact`
   ADD CONSTRAINT `subenvironment_id_refs_id_77311c2e` FOREIGN KEY (`subenvironment_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `subenvironment_organization`
+-- Restrictii pentru tabele `subenvironment_organization`
 --
 ALTER TABLE `subenvironment_organization`
   ADD CONSTRAINT `subenvironment_id_refs_id_3ff55ced` FOREIGN KEY (`subenvironment_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `subenvironment_ownerrelationship`
+-- Restrictii pentru tabele `subenvironment_ownerrelationship`
 --
 ALTER TABLE `subenvironment_ownerrelationship`
   ADD CONSTRAINT `envUser_id_refs_id_13a65d2` FOREIGN KEY (`envUser_id`) REFERENCES `envuser_envuser` (`id`),
   ADD CONSTRAINT `subEnvironment_id_refs_id_51b8c39c` FOREIGN KEY (`subEnvironment_id`) REFERENCES `subenvironment_subenvironment` (`id`);
 
 --
--- Constraints for table `subenvironment_subenvironment`
+-- Restrictii pentru tabele `subenvironment_subenvironment`
 --
 ALTER TABLE `subenvironment_subenvironment`
   ADD CONSTRAINT `ring_id_refs_id_55709796` FOREIGN KEY (`ring_id`) REFERENCES `city_ring` (`id`);
