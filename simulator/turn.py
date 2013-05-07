@@ -4,7 +4,7 @@ from home.base import get_agent_name_list
 from simulator.sandbox import JaCaMoSandbox
 from schedule.models import Schedule
 from solution.specification import SolutionSpecification
-from subenvironment.models import SubEnvironment, DefaultExtra
+from subenvironment.models import SubEnvironment, DefaultExtra, Agent
 from multiprocessing import Pipe, Process
 import os
 import tempfile
@@ -13,7 +13,7 @@ def runTurn(numSteps):
     for step in xrange(numSteps):
         runStep(step)
     defaultValue = None
-    for field in EnvAgent._meta.fields: #@UndefinedVariable
+    for field in EnvAgent._meta.fields:  # @UndefinedVariable
         if field.name == 'timePool':
             defaultValue = field.default
             break
@@ -25,7 +25,7 @@ def getSandboxProcess(subenvironment, solutions, usePipe=False):
         'name': 'subenv_%d' % (subenvironment.pk,),
         'infra': "Centralised",
         'env': "c4jason.CartagoEnvironment",
-        #'env': "Env(2, 2000)",
+        # 'env': "Env(2, 2000)",
         'agents': [ ],
     }
     solutionFiles = {
@@ -54,6 +54,7 @@ def getSandboxProcess(subenvironment, solutions, usePipe=False):
                 agents.append({
                     'arch': 'c4jason.CAgentArch',
                     'name': agentName,
+                    'no' : agentZip.cardinality
                 })
     agents.append({
         'arch': 'c4jason.CAgentArch',

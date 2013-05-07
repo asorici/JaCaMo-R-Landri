@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gazda: 127.0.0.1
--- Timp de generare: 11 Apr 2013 la 14:06
+-- Timp de generare: 07 May 2013 la 16:27
 -- Versiune server: 5.5.16
 -- Versiune PHP: 5.3.8
 
@@ -158,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
-(1, 'admin', '', '', 'popa.tiberiu@gmail.com', 'pbkdf2_sha256$10000$TYcolTXv5TOb$AyS/4V7xwQ3lvojxnCkQd7i+Tsntwy3lO3oGSgQ5Hj0=', 1, 1, 1, '2013-04-11 11:57:54', '2012-07-12 11:13:16'),
-(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2013-02-07 09:19:31', '2012-07-12 11:14:25'),
-(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2013-02-07 09:19:43', '2012-07-12 11:14:40'),
+(1, 'admin', '', '', 'popa.tiberiu@gmail.com', 'pbkdf2_sha256$10000$TYcolTXv5TOb$AyS/4V7xwQ3lvojxnCkQd7i+Tsntwy3lO3oGSgQ5Hj0=', 1, 1, 1, '2013-05-07 13:24:41', '2012-07-12 11:13:16'),
+(2, 'tibi', '', '', '', 'pbkdf2_sha256$10000$j4VqrRFjDGoy$mMDRAp9YUBpIDZXDoQDBJLe4ZhNQilyHnU7f4LUqIt4=', 0, 1, 0, '2013-05-01 13:02:17', '2012-07-12 11:14:25'),
+(3, 'andrei', '', '', '', 'pbkdf2_sha256$10000$WDjG5qD6agbH$GtnTKn45ca2zlUa1uSEgtGolmWIzJ/9+iqhTaUZ86z8=', 0, 1, 0, '2013-05-07 13:49:24', '2012-07-12 11:14:40'),
 (4, 'mihai', '', '', '', 'pbkdf2_sha256$10000$Ac6AXMUmTKvR$EyJJuVXpvAAq/6hPqgufSiTLweRfKQPSvoJHuvVDVbA=', 0, 1, 0, '2012-07-26 21:14:53', '2012-07-12 11:14:46');
 
 -- --------------------------------------------------------
@@ -257,7 +257,14 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   PRIMARY KEY (`id`),
   KEY `django_admin_log_403f60f` (`user_id`),
   KEY `django_admin_log_1bb8f392` (`content_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Salvarea datelor din tabel `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id`, `object_id`, `object_repr`, `action_flag`, `change_message`) VALUES
+(1, '2013-05-07 13:41:02', 1, 10, '1', 'Roulette', 2, 'Changed cardinality for agent "Roulette Master".');
 
 -- --------------------------------------------------------
 
@@ -321,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('0305f91d962a32c7db201aab5b0479c0', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-09-30 13:56:55'),
 ('0b014a2378d2641580d3f7c5d34fdf4e', 'NmJmZWUyZWExMGEyNzU1NGUwZjg2MzhiNzA4ZjA3MDI5YTg0MzNiYjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQJ1Lg==\n', '2012-08-19 19:17:54'),
-('650eb530def73bf9dda692173a7ddb50', 'N2RjY2UwOTYxNTQ3OThlMWY1YjAyZWJlMGQyZWI2YjYyYzYzMmM3OTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2013-04-25 11:57:54'),
+('5874acaf0f5fec8ea98bede1a3afaa32', 'MTVlM2MwNGM0YzQ0Y2UxYWQ5MmNiZjlkNTZjZmI4MDMyNjFiZTVjYTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQN1Lg==\n', '2013-05-21 13:49:24'),
 ('6525b83b8a7f28eccc91f99befb478cb', 'MTVlM2MwNGM0YzQ0Y2UxYWQ5MmNiZjlkNTZjZmI4MDMyNjFiZTVjYTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQN1Lg==\n', '2013-02-21 09:19:43');
 
 -- --------------------------------------------------------
@@ -427,14 +434,14 @@ CREATE TABLE IF NOT EXISTS `simulator_abstractprocess` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `simulator_abstractprocess_6c4d8baf` (`solution_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 --
 -- Salvarea datelor din tabel `simulator_abstractprocess`
 --
 
 INSERT INTO `simulator_abstractprocess` (`id`, `solution_id`, `created`) VALUES
-(50, 12, '2013-02-08 09:12:33');
+(65, 13, '2013-05-07 14:24:00');
 
 -- --------------------------------------------------------
 
@@ -456,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `solution_solution` (
   PRIMARY KEY (`id`),
   KEY `solution_solution_75b32dfd` (`envUser_id`),
   KEY `solution_solution_e004a33` (`subEnvironment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Salvarea datelor din tabel `solution_solution`
@@ -468,7 +475,7 @@ INSERT INTO `solution_solution` (`id`, `name`, `envUser_id`, `subEnvironment_id`
 (4, 'Factorial', 4, 2, 'Trivial computation!', 1, 'users/4/solutions/2/factorial_solution_agents.zip', '', '', '2012-07-13 10:56:26'),
 (5, 'sail', 2, 4, 'description', 1, 'users/2/solutions/4/roulette_feedback_solution_agents.zip', '', '', '2012-07-19 10:55:12'),
 (6, 'Toer', 2, 5, 'Really dumb agent for TicTacToe!', 1, 'users/2/solutions/5/tictactoe_solution_agents.zip', '', '', '2012-07-19 11:42:36'),
-(12, 'compare1', 3, 6, 'tit for tat vs extortionist', 0, 'users/3/solutions/6/compare1_1.zip', '', '', '2013-02-08 09:08:09');
+(13, 'extortionist_vs_titForTat', 3, 6, 'Extortionist plays Tit For Tat', 0, 'users/3/solutions/6/iterated_prisoner_dilemma_solution_agents_1.zip', '', '', '2013-04-25 15:48:36');
 
 -- --------------------------------------------------------
 
@@ -481,6 +488,7 @@ CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
   `name` varchar(200) NOT NULL,
   `subenvironment_id` int(11) NOT NULL,
   `file` varchar(100) NOT NULL,
+  `cardinality` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `subenvironment_agent_4d5c45ed` (`subenvironment_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -489,10 +497,10 @@ CREATE TABLE IF NOT EXISTS `subenvironment_agent` (
 -- Salvarea datelor din tabel `subenvironment_agent`
 --
 
-INSERT INTO `subenvironment_agent` (`id`, `name`, `subenvironment_id`, `file`) VALUES
-(1, 'Roulette Master', 1, 'subenvironments/1/agents/roulette_master_agents.zip'),
-(2, 'Roulette Feedback Master', 4, 'subenvironments/4/agents/roulette_feedback_master_agents.zip'),
-(3, 'Iterated Prisoner s Dilemma Master', 6, 'subenvironments\\6\\agents\\iterated_prisoner_dilemma_master_agents.zip');
+INSERT INTO `subenvironment_agent` (`id`, `name`, `subenvironment_id`, `file`, `cardinality`) VALUES
+(1, 'Roulette Master', 1, 'subenvironments/1/agents/roulette_master_agents.zip', 1),
+(2, 'Roulette Feedback Master', 4, 'subenvironments/4/agents/roulette_feedback_master_agents.zip', 1),
+(3, 'Iterated Prisoner s Dilemma Master', 6, 'subenvironments\\6\\agents\\iterated_prisoner_dilemma_master_agents.zip', 1);
 
 -- --------------------------------------------------------
 

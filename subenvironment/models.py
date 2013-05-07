@@ -81,6 +81,7 @@ class BaseFileComponent(BaseDefaultFileComponent):
 
 class Agent(BaseFileComponent):
     file = models.FileField(upload_to=functools.partial(dir_upload_to, 'agents'))
+    cardinality = models.IntegerField()
 
 class Artifact(BaseFileComponent):
     file = models.FileField(upload_to=functools.partial(dir_upload_to, 'artifacts'))
