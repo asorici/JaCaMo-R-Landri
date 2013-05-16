@@ -22,6 +22,10 @@ public class Restaurant extends Artifact {
 
 	@OPERATION
 	public boolean change(double price, double service, double quality) {
+		// if the restaurant is system controlled
+		if (owner == null)
+			return false;
+
 		if (!getOpUserId().getAgentName().equals(owner.getAgentName())) {
 			return false;
 		}
@@ -34,9 +38,8 @@ public class Restaurant extends Artifact {
 	}
 
 	@OPERATION
-	public void serve(OpFeedbackParam<Double[]> result) {
-		Double[] res = new Double[] { price, service, quality };
-		result.set(res);
+	public void serve() {
+		// System.out.println("Serving food at restaurant owned by " + owner
+		// + " has cuisine" + cuisine + " client is " + getOpUserName());
 	}
-
 }

@@ -49,9 +49,9 @@ public class CustomerHelper extends Artifact {
 		int res = -1;
 		double rand = Math.random();
 		double sum = 0;
-		int i = 0;
+		int i = -1;
 		while (sum < rand) {
-			sum += tasteVector[i++];
+			sum += tasteVector[++i];
 		}
 		res = i;
 		result.set(res);

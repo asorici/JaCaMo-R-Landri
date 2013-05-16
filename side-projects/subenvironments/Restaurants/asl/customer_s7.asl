@@ -16,7 +16,17 @@
 		.random(S);
 		+biasService(S/5);
 		.print("make artifact");
-		makeArtifact("ch","CustomerHelper",[],CH).
+		
+		//create custom name for CustomerHelper artifact
+		.my_name(Name);
+		.concat("ch",Name,CHName);
+		.print("NAME IS ",CHName);
+		makeArtifact(CHName,"CustomerHelper",[],CH).
+
+
+/* Skipping first turn so that the helper artifact can be built before */
++startTurn(1) : true
+	<- true.
 		
 +startTurn(CurrentStep)
 	<- .print("Period ",CurrentStep, " has started.");
@@ -26,9 +36,10 @@
 		decideEat(EAT);
 		if(EAT)
 		{
-		  decideCuisine(Cuisine);
-		 .print("I want to eat. I will eat ",Cuisine);
-		  //getRestaurant(Cuisine,RR);
+		  decideCuisine(C);
+		 .print("I want to eat. I will eat ",C);
+		  getRestaurant(C,Res);
+		  .print("I'm eating at restaurant ",Res);
 		}
 		else
 		{
