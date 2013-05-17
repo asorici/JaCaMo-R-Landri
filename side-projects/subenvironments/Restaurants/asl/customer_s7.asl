@@ -11,11 +11,18 @@
 
 +!start : true
 	<-	
-		.random(Q);
-		+biasQuality(Q/5);
-		.random(S);
-		+biasService(S/5);
-		.print("make artifact");
+		// establish if this agent will be a feedback giver
+		.random(F);
+		if(F<0.8)
+		{
+			+feedback(true);
+		}
+		else
+		{
+			+feedback(false);
+		}
+		?feedback(ANS);
+		.print("gives feedback: ",ANS);
 		
 		//create custom name for CustomerHelper artifact
 		.my_name(Name);
@@ -30,16 +37,20 @@
 		
 +startTurn(CurrentStep)
 	<- .print("Period ",CurrentStep, " has started.");
-	    ?biasQuality(Bias_Q);
-	    ?biasService(Bias_S);
-		.print("quality bias: ",Bias_Q," service bias ",Bias_S);
+
+
 		decideEat(EAT);
 		if(EAT)
 		{
 		  decideCuisine(C);
 		 .print("I want to eat. I will eat ",C);
 		  getRestaurant(C,Res);
-		  .print("I'm eating at restaurant ",Res);
+		  serve(Price,Service,Quality)[artifact_id(Res)];
+		  .print("Params: ",Price,Service,Quality);
+		  computeUtility(Price,Service,Quality,Utility);
+		  computeTip(Utility,Price,Tip);
+		  .print("tip is ",Tip," for price ",Price);
+		  pay(Tip)[artifact_id(Res)];
 		}
 		else
 		{

@@ -14,7 +14,7 @@
 +rest(R): true
 	<- 
 	   focus(R);
-	   change(0.6,0.6,0.6).
+	   change(60,60,60).
 	   
 	   
 +startTurn(N)

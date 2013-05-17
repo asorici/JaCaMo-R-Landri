@@ -1,18 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.aria.rlandri.generic.artifacts.SimultaneouslyExecutedCoordinator;
-import org.aria.rlandri.generic.artifacts.annotation.GAME_OPERATION;
-import org.aria.rlandri.generic.artifacts.annotation.MASTER_OPERATION;
-import org.aria.rlandri.generic.artifacts.tools.ValidationResult;
 
 import cartago.AgentId;
 import cartago.ArtifactConfig;
 import cartago.ArtifactId;
-import cartago.CartagoException;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
 import cartago.OperationException;
@@ -25,11 +19,18 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 
 	public static final int NUM_CUISINE = 5;
 
+	public static final double PRICE_PER_UNIT_SERVICE = 0.2;
+	public static final double PRICE_PER_UNIT_QUALITY = 0.2;
+	public static final double RENT_PRICE = 100;
+	public static final double MAX_PRICE = 100;
+	public static final double MAX_SERVICE = 100;
+	public static final double MAX_QUALITY = 100;
+
 	private final List<AgentId> order = new ArrayList<AgentId>();
-	private final HashMap<Integer, ArrayList<String>> restaurantTable = new HashMap<Integer, ArrayList<String>>();
+	private final HashMap<Integer, ArrayList<ArtifactId>> restaurantTable = new HashMap<Integer, ArrayList<ArtifactId>>();
 	{
 		for (int i = 0; i < NUM_CUISINE; i++) {
-			restaurantTable.put(i, new ArrayList<String>());
+			restaurantTable.put(i, new ArrayList<ArtifactId>());
 		}
 	}
 
@@ -47,11 +48,11 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Artifact id: " + id);
-			ArrayList<String> al = restaurantTable.get(cuisine);
-			al.add(name);
+			// System.out.println("Artifact id: " + id);
+			ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
+			al.add(id);
 		}
-		System.out.println(restaurantTable);
+		// System.out.println(restaurantTable);
 	}
 
 	@OPERATION
@@ -76,18 +77,18 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 			e.printStackTrace();
 		}
 		signal(aid, "rest", id);
-		System.out.println("Artifact id: " + id);
-		ArrayList<String> al = restaurantTable.get(cuisine);
-		al.add(name);
-		System.out.println(restaurantTable);
+		// System.out.println("Artifact id: " + id);
+		ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
+		al.add(id);
+		// System.out.println(restaurantTable);
 	}
 
 	@OPERATION
-	public void getRestaurant(int cuisine, OpFeedbackParam<String> res) {
-		System.out.println(getOpUserId() + " wants " + cuisine);
-		ArrayList<String> al = restaurantTable.get(cuisine);
+	public void getRestaurant(int cuisine, OpFeedbackParam<ArtifactId> res) {
+		// System.out.println(getOpUserId() + " wants " + cuisine);
+		ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
 		int random = (int) (Math.random() * al.size());
-		String name = al.get(random);
+		ArtifactId name = al.get(random);
 		res.set(name);
 	}
 
