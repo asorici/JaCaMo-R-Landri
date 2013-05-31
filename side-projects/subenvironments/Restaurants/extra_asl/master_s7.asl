@@ -11,4 +11,12 @@
 
 +!start : true
 	<-	createSystemRestaurants.
+
+
+/* Skipping first turn so that the helper artifact can be built before */
++startTurn(1) : true
+	<- true.
+
++collectRent(CurrentStep)
+	<- makeRestaurantsPayRent.
 		

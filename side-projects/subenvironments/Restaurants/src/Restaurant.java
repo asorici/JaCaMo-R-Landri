@@ -1,7 +1,10 @@
 import cartago.AgentId;
 import cartago.Artifact;
+import cartago.LINK;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Restaurant extends Artifact {
 
@@ -14,6 +17,16 @@ public class Restaurant extends Artifact {
 
 	private double balance = 1000;
 
+	private int transactionNumber = 0;
+
+	private int currentStep = 0;
+
+	private ArrayList<ArrayList<Report>> reports = new ArrayList<ArrayList<Report>>();
+	{
+		// first one will be unused
+		reports.add(new ArrayList<Report>());
+	}
+
 	void init(AgentId owner, int cuisine) {
 		System.out.println("owner: " + owner);
 		// defineObsProperty("count", 0);
@@ -25,6 +38,20 @@ public class Restaurant extends Artifact {
 		this.quality = Math.random() * Restaurants.MAX_QUALITY;
 
 		System.out.println("this restaurant has cuisine " + cuisine);
+	}
+
+	@LINK
+	void payRent(String price, String currentStep) {
+		System.out.println("------" + price + "----" + currentStep);
+		double rentPrice = Double.parseDouble(price);
+		this.currentStep = Integer.parseInt(currentStep);
+		balance -= rentPrice;
+
+		ArrayList<Report> newDay = new ArrayList<Report>();
+		reports.add(newDay);
+
+		System.out.println("paying rent in step " + currentStep + " owner: "
+				+ owner);
 	}
 
 	@OPERATION
@@ -40,7 +67,6 @@ public class Restaurant extends Artifact {
 		this.service = service;
 		this.quality = quality;
 
-		// System.out.println("Changed! "+price+" "+service+" "+quality);
 		return true;
 	}
 
@@ -51,7 +77,8 @@ public class Restaurant extends Artifact {
 
 	@OPERATION
 	public void serve(OpFeedbackParam<Double> price,
-			OpFeedbackParam<Double> service, OpFeedbackParam<Double> quality) {
+			OpFeedbackParam<Double> service, OpFeedbackParam<Double> quality,
+			OpFeedbackParam<Integer> transactionId) {
 		System.out.println(getOpUserName() + "eats at restaurant owned by "
 				+ owner + " has cuisine" + cuisine);
 
@@ -63,13 +90,50 @@ public class Restaurant extends Artifact {
 		service.set(this.service);
 		quality.set(this.quality);
 
+		AgentId id = getOpUserId();
+		Report newReport = new Report();
+		newReport.setTransactionId(transactionNumber);
+		newReport.setAgentId(id);
+		reports.get(currentStep).add(newReport);
+
+		transactionId.set(transactionNumber++);
+
+	}
+
+	private Report findReport(int id) {
+		Report rep = null;
+		// ArrayList<Report> reps = reports.get(step);
+		for (ArrayList<Report> reps : reports)
+			for (Report r : reps) {
+				// System.out.println(r.getTransactionId() + " vs " + id);
+				if (r.getTransactionId() == id) {
+					rep = r;
+					break;
+				}
+			}
+		return rep;
 	}
 
 	@OPERATION
-	public void pay(double tip) {
+	public void pay(double tip, int transactionId) {
 		balance += price;
 		balance += tip;
-		System.out.println("New balance " + balance);
+		// System.out.println("New balance " + balance);
+		Report rep = findReport(transactionId);
+		// System.out.println(reports);
+		// System.out.println("tip and id" + tip + " + " + transactionId);
+		// System.out.println("REPORT!!!1: " + rep+" id:"+transactionId);
+		rep.setTip(tip);
+	}
+
+	@OPERATION
+	public void giveFeedback(int rating, int transactionId) {
+		Report rep = findReport(transactionId);
+		// System.out.println("REPORT!!!2: " + rep+" id: "+transactionId);
+		rep.setRating(rating);
+		System.out.println("completed report: " + rep.getRating() + " "
+				+ rep.getTip() + " " + rep.getTransactionId() + " "
+				+ rep.getAgentId());
 	}
 
 }

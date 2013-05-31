@@ -18,7 +18,7 @@ public class CustomerHelper extends Artifact {
 	private double satisfactionPoint;
 
 	// between 0 and 10 %
-	private double generosity;
+	private double tipPercentOfPrice;
 
 	void init() {
 		// assigns random values to taste vector
@@ -40,11 +40,11 @@ public class CustomerHelper extends Artifact {
 		qualityBias = Math.random() * 0.4;
 		serviceBias = Math.random() * 0.4;
 
-		satisfactionPoint = 0.2 + 0.8 * Math.random();
+		satisfactionPoint = 0.1 + 0.7 * Math.random();
 		System.out.println("Satisfaction point: " + satisfactionPoint);
 
-		generosity = ((int) (Math.random() * 15)) / 100.0;
-		System.out.println("Generosity: " + generosity);
+		tipPercentOfPrice = ((int) (Math.random() * 15)) / 100.0;
+		System.out.println("Generosity: " + tipPercentOfPrice);
 	}
 
 	@OPERATION
@@ -74,6 +74,7 @@ public class CustomerHelper extends Artifact {
 	@OPERATION
 	public void computeUtility(double price, double service, double quality,
 			OpFeedbackParam<Double> ut) {
+		System.out.println("Params: " + price + " " + service + " " + quality);
 		double randomS = 2 * (0.5 - Math.random()) * serviceBias;
 		double randomQ = 2 * (0.5 - Math.random()) * qualityBias;
 		double perceivedService = Helper.regulate((1 + randomS) * service, 0,
@@ -83,7 +84,10 @@ public class CustomerHelper extends Artifact {
 		System.out.println("real vs perceived: " + service + " "
 				+ perceivedService);
 
-		double utility = (1 - price) + perceivedService + perceivedQuality;
+		double utility = (Restaurants.MAX_PRICE - price)
+				/ Restaurants.MAX_PRICE + perceivedService
+				/ Restaurants.MAX_SERVICE + perceivedQuality
+				/ Restaurants.MAX_QUALITY;
 		utility /= 3;
 		ut.set(utility);
 	}
@@ -93,8 +97,34 @@ public class CustomerHelper extends Artifact {
 			OpFeedbackParam<Double> t) {
 		double tip = 0;
 		if (utility > satisfactionPoint) {
-			tip = price * generosity;
+			tip = price * tipPercentOfPrice;
 		}
 		t.set(tip);
+	}
+
+	@OPERATION
+	public void computeFeedback(double utility, OpFeedbackParam<Integer> stars) {
+		int s = -1;
+		if (utility > satisfactionPoint) {
+			double interval = 1 - satisfactionPoint;
+			// System.out.println("Utility is" + utility + " and Point"
+			// + (satisfactionPoint + interval / 3));
+			// System.out.println("Utility is" + utility + " and Point"
+			// + (satisfactionPoint + (interval * 2) / 3));
+			if (utility < satisfactionPoint + interval / 3) {
+				s = 3;
+			} else if (utility < satisfactionPoint + (interval * 2) / 3) {
+				s = 4;
+			} else {
+				s = 5;
+			}
+		} else {
+			if (utility > satisfactionPoint / 2) {
+				s = 2;
+			} else {
+				s = 1;
+			}
+		}
+		stars.set(s);
 	}
 }

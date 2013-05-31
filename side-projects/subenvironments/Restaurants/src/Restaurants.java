@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.aria.rlandri.generic.artifacts.SimultaneouslyExecutedCoordinator;
 
@@ -31,6 +32,13 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 	{
 		for (int i = 0; i < NUM_CUISINE; i++) {
 			restaurantTable.put(i, new ArrayList<ArtifactId>());
+		}
+	}
+	
+	@Override
+	protected void doPreEvaluation() {
+		for (AgentId aid : masterAgents.getAgentIds()) {
+			signal(aid, "collectRent", currentStep);
 		}
 	}
 
@@ -93,10 +101,22 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 	}
 
 	@OPERATION
-	public void dine(String name) {
-		System.out.println("Agent " + getOpUserName() + " wants to eat at "
-				+ name);
+	public void makeRestaurantsPayRent() throws OperationException {
+		Set<Integer> keys = restaurantTable.keySet();
+		for (Integer key : keys) {
+			ArrayList<ArtifactId> restaurants = restaurantTable.get(key);
+			for (ArtifactId restaurant : restaurants) {
+				execLinkedOp(restaurant, "payRent",""+RENT_PRICE,""+currentStep);
+			}
+		}
+		setPreEvaluationDone(true);
+		// System.out.println("make them pay!");
 	}
+
+	/*
+	 * @OPERATION public void dine(String name) { System.out.println("Agent " +
+	 * getOpUserName() + " wants to eat at " + name); }
+	 */
 
 	@Override
 	protected void saveState() {

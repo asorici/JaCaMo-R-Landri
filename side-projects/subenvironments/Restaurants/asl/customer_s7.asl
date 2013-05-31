@@ -35,22 +35,31 @@
 +startTurn(1) : true
 	<- true.
 		
+@turn[atomic]		
 +startTurn(CurrentStep)
 	<- .print("Period ",CurrentStep, " has started.");
-
-
 		decideEat(EAT);
 		if(EAT)
 		{
 		  decideCuisine(C);
 		 .print("I want to eat. I will eat ",C);
 		  getRestaurant(C,Res);
-		  serve(Price,Service,Quality)[artifact_id(Res)];
+		  serve(Price,Service,Quality,TransactionId)[artifact_id(Res)];
 		  .print("Params: ",Price,Service,Quality);
 		  computeUtility(Price,Service,Quality,Utility);
+		  .print("Utility is: ",Utility);
 		  computeTip(Utility,Price,Tip);
 		  .print("tip is ",Tip," for price ",Price);
-		  pay(Tip)[artifact_id(Res)];
+		  pay(Tip,TransactionId)[artifact_id(Res)];
+		  computeFeedback(Utility,Stars);
+		  ?feedback(FB);
+		  .print("Feedback: ",FB);
+		  if(FB==true)
+		  {
+		    .print("ajung aici");
+		  	giveFeedback(Stars,TransactionId)[artifact_id(Res)];
+		  	.print("I'm giving ",Stars," number of stars");
+		   };
 		}
 		else
 		{
