@@ -18,7 +18,8 @@
 	   
 	   
 +startTurn(N)
-	<-	.print("Signal received for start of Turn ",N).
+	<-	getReportsInPeriod(N-1,Reports);
+	  .print("Signal received for start of Turn ",N).
 	
 	
 +!registration: true

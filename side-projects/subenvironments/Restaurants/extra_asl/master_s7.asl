@@ -17,6 +17,10 @@
 +startTurn(1) : true
 	<- true.
 
-+collectRent(CurrentStep)
-	<- makeRestaurantsPayRent.
++beforePeriod(CurrentStep)
+	<- 
+	   makeRestaurantsPayRent.
 		
++afterPeriod(CurrentStep)
+	<-
+		getBalanceFromRestaurants.

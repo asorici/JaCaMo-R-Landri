@@ -54,6 +54,13 @@ public class Restaurant extends Artifact {
 				+ owner);
 	}
 
+	@LINK
+	void getBalance(OpFeedbackParam<Double> balance) {
+		System.out.println("Restaurant " + getId().getName()
+				+ "Parameters are: " + price + "-" + service + "-" + quality);
+		balance.set(this.balance);
+	}
+
 	@OPERATION
 	public boolean change(double price, double service, double quality) {
 		// if the restaurant is system controlled

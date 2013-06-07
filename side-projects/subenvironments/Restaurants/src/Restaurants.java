@@ -34,11 +34,18 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 			restaurantTable.put(i, new ArrayList<ArtifactId>());
 		}
 	}
-	
+
 	@Override
 	protected void doPreEvaluation() {
 		for (AgentId aid : masterAgents.getAgentIds()) {
-			signal(aid, "collectRent", currentStep);
+			signal(aid, "beforePeriod", currentStep);
+		}
+	}
+	
+	@Override
+	protected void doPostEvaluation() {
+		for (AgentId aid : masterAgents.getAgentIds()) {
+			signal(aid, "afterPeriod", currentStep);
 		}
 	}
 
@@ -106,11 +113,30 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 		for (Integer key : keys) {
 			ArrayList<ArtifactId> restaurants = restaurantTable.get(key);
 			for (ArtifactId restaurant : restaurants) {
-				execLinkedOp(restaurant, "payRent",""+RENT_PRICE,""+currentStep);
+				execLinkedOp(restaurant, "payRent", "" + RENT_PRICE, ""
+						+ currentStep);
 			}
 		}
 		setPreEvaluationDone(true);
 		// System.out.println("make them pay!");
+	}
+
+	@OPERATION
+	public void getBalanceFromRestaurants() throws OperationException {
+		Set<Integer> keys = restaurantTable.keySet();
+		for (Integer key : keys) {
+			ArrayList<ArtifactId> restaurants = restaurantTable.get(key);
+			for (ArtifactId restaurant : restaurants) {
+				// Double d = new Double(0);
+				OpFeedbackParam<Double> d = new OpFeedbackParam<Double>();
+				execLinkedOp(restaurant, "getBalance", d);
+				double val = d.get();
+				System.out.println("Balance for restaurant "
+						+ restaurant.getName() + " is: " + val);
+				// System.out.println("Value: "+d);
+			}
+		}
+		setPostEvaluationDone(true);
 	}
 
 	/*
@@ -120,6 +146,7 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 
 	@Override
 	protected void saveState() {
+		System.out.println("SAVEEEEEEEEEEEEEEEEEEEEEEEE");
 		// TODO Auto-generated method stub
 
 	}
