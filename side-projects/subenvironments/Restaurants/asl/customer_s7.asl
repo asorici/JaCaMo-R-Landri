@@ -43,7 +43,9 @@
 		{
 		  decideCuisine(C);
 		 .print("I want to eat. I will eat ",C);
-		  getRestaurant(C,Res);
+		  //getRestaurant(C,Res);
+		  getRestaurants(C,Restaurants);
+		  decideRestaurant(Restaurants,Res,Name);
 		  serve(Price,Service,Quality,TransactionId)[artifact_id(Res)];
 		  .print("Params: ",Price,Service,Quality);
 		  computeUtility(Price,Service,Quality,Utility);
@@ -52,13 +54,14 @@
 		  .print("tip is ",Tip," for price ",Price);
 		  pay(Tip,TransactionId)[artifact_id(Res)];
 		  computeFeedback(Utility,Stars);
+		  storeRating(Res,Stars);
 		  ?feedback(FB);
 		  .print("Feedback: ",FB);
 		  if(FB==true)
 		  {
 		    .print("ajung aici");
 		  	giveFeedback(Stars,TransactionId)[artifact_id(Res)];
-		  	.print("I'm giving ",Stars," number of stars");
+		  	.print("I'm giving ",Stars," number of stars to ",Name);
 		   };
 		}
 		else

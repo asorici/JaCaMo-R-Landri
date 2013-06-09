@@ -41,7 +41,7 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 			signal(aid, "beforePeriod", currentStep);
 		}
 	}
-	
+
 	@Override
 	protected void doPostEvaluation() {
 		for (AgentId aid : masterAgents.getAgentIds()) {
@@ -54,18 +54,20 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 		AgentId aid = getOpUserId();
 		System.out.println("CREATING SYSTEM RESTAURANTS " + aid);
 		for (int cuisine = 0; cuisine < NUM_CUISINE; cuisine++) {
-			ArtifactConfig cf = new ArtifactConfig(aid, cuisine);
-			ArtifactId id = null;
-			String name = "restaurant" + cuisine;
-			try {
-				id = makeArtifact(name, "Restaurant", cf);
-			} catch (OperationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for (int index = 0; index < 2; index++) {
+				ArtifactConfig cf = new ArtifactConfig(aid, cuisine);
+				ArtifactId id = null;
+				String name = "restaurant" + cuisine + "-" + index;
+				try {
+					id = makeArtifact(name, "Restaurant", cf);
+				} catch (OperationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// System.out.println("Artifact id: " + id);
+				ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
+				al.add(id);
 			}
-			// System.out.println("Artifact id: " + id);
-			ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
-			al.add(id);
 		}
 		// System.out.println(restaurantTable);
 	}
@@ -98,13 +100,19 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 		// System.out.println(restaurantTable);
 	}
 
+	/*
+	 * @OPERATION public void getRestaurant(int cuisine,
+	 * OpFeedbackParam<ArtifactId> res) { // System.out.println(getOpUserId() +
+	 * " wants " + cuisine); ArrayList<ArtifactId> al =
+	 * restaurantTable.get(cuisine); int random = (int) (Math.random() *
+	 * al.size()); ArtifactId name = al.get(random); res.set(name); }
+	 */
+
 	@OPERATION
-	public void getRestaurant(int cuisine, OpFeedbackParam<ArtifactId> res) {
-		// System.out.println(getOpUserId() + " wants " + cuisine);
+	public void getRestaurants(int cuisine,
+			OpFeedbackParam<ArrayList<ArtifactId>> list) {
 		ArrayList<ArtifactId> al = restaurantTable.get(cuisine);
-		int random = (int) (Math.random() * al.size());
-		ArtifactId name = al.get(random);
-		res.set(name);
+		list.set(al);
 	}
 
 	@OPERATION
@@ -146,7 +154,7 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 
 	@Override
 	protected void saveState() {
-		System.out.println("SAVEEEEEEEEEEEEEEEEEEEEEEEE");
+
 		// TODO Auto-generated method stub
 
 	}

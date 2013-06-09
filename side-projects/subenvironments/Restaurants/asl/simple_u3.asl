@@ -14,11 +14,11 @@
 +rest(R): true
 	<- 
 	   focus(R);
-	   change(1,100,100).
+	   change(100,0,0).
 	   
 	   
 +startTurn(N)
-	<-	getReportsInPeriod(N-1,Reports);
+	<-	//getReportsInPeriod(N-1,Reports);
 	  .print("Signal received for start of Turn ",N).
 	
 	

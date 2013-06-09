@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cartago.Artifact;
+import cartago.ArtifactId;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
 
@@ -19,6 +23,8 @@ public class CustomerHelper extends Artifact {
 
 	// between 0 and 10 %
 	private double tipPercentOfPrice;
+
+	private HashMap<ArtifactId, RestaurantInfo> restaurantsInfo = new HashMap<ArtifactId, RestaurantInfo>();
 
 	void init() {
 		// assigns random values to taste vector
@@ -74,7 +80,8 @@ public class CustomerHelper extends Artifact {
 	@OPERATION
 	public void computeUtility(double price, double service, double quality,
 			OpFeedbackParam<Double> ut) {
-		System.out.println("Params: " + price + " " + service + " " + quality);
+		// System.out.println("Params:  " + price + " :: " + service + " :: " +
+		// quality);
 		double randomS = 2 * (0.5 - Math.random()) * serviceBias;
 		double randomQ = 2 * (0.5 - Math.random()) * qualityBias;
 		double perceivedService = Helper.regulate((1 + randomS) * service, 0,
@@ -127,4 +134,59 @@ public class CustomerHelper extends Artifact {
 		}
 		stars.set(s);
 	}
+
+	@OPERATION
+	public void decideRestaurant(ArrayList<ArtifactId> al,
+			OpFeedbackParam<ArtifactId> res, OpFeedbackParam<String> rname) {
+
+		double[] prob = new double[al.size()];
+		// System.out.println("list: "+al);
+		for (int i = 0; i < al.size(); i++) {
+			ArtifactId aid = al.get(i);
+			RestaurantInfo ri = restaurantsInfo.get(aid);
+			if (ri == null) {
+				prob[i] = 3 * 3;
+			} else {
+				prob[i] = ri.getAverageRating() * ri.getAverageRating();
+				System.out.println("~~~~~~~~~" + prob[i]);
+			}
+		}
+
+		double sum = 0;
+		for (int i = 0; i < prob.length; i++) {
+			sum += prob[i];
+		}
+		for (int i = 0; i < prob.length; i++) {
+			prob[i] /= sum;
+			System.out.println("prob: " + al.get(i) + "--" + prob[i]);
+		}
+
+		double r = Math.random();
+		sum = 0;
+		int i = -1;
+		while (r > sum) {
+			i++;
+			sum += prob[i];
+		}
+
+		// int random = (int) (Math.random() * al.size());
+		ArtifactId name = al.get(i);
+		rname.set(name.getName());
+		res.set(name);
+		// System.out.println("received: " + al);
+	}
+
+	@OPERATION
+	private void storeRating(ArtifactId aid, int rating) {
+		System.out.println("Store!");
+		RestaurantInfo ri = restaurantsInfo.get(aid);
+		if (ri == null) {
+			ri = new RestaurantInfo();
+			ri.addRating(rating);
+			restaurantsInfo.put(aid, ri);
+		} else {
+			ri.addRating(rating);
+		}
+	}
+
 }
