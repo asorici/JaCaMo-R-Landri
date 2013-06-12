@@ -1,7 +1,12 @@
+package org.aria.rlandri;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.aria.rlandri.generic.artifacts.SimultaneouslyExecutedCoordinator;
 
@@ -55,11 +60,13 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 		System.out.println("CREATING SYSTEM RESTAURANTS " + aid);
 		for (int cuisine = 0; cuisine < NUM_CUISINE; cuisine++) {
 			for (int index = 0; index < 2; index++) {
+				// if(cuisine==3) continue;
 				ArtifactConfig cf = new ArtifactConfig(aid, cuisine);
 				ArtifactId id = null;
 				String name = "restaurant" + cuisine + "-" + index;
 				try {
-					id = makeArtifact(name, "Restaurant", cf);
+					id = makeArtifact(name, "org.aria.rlandri.Restaurant",
+							cf);
 				} catch (OperationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -82,14 +89,32 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 	}
 
 	@OPERATION
-	public void createRestaurant(int cuisine) {
+	public void createRestaurant(int userID, int cuisine) {
+		
+		System.out.println("HERE!");
+		
 		AgentId aid = getOpUserId();
 		ArtifactConfig cf = new ArtifactConfig(aid, cuisine);
 		ArtifactId id = null;
 		String name = "restaurant" + aid.getAgentName();
+		// String[] s = aid.getAgentName().split("[agent|_]");
+
+		Pattern p = Pattern.compile("[0-9]*");
+		Matcher m = p.matcher(aid.getAgentName());
+		String agNr = "";
+		while (m.find()) {
+			agNr = m.group();
+			if (!agNr.isEmpty())
+				break;
+		}
+		// get
+		String className = "org.aria.rlandri.user" + userID + ".Restaurant"
+				+ agNr;
+		// System.out.println("~~~~~~~~~"+className);
 		try {
-			id = makeArtifact(name, "Restaurant", cf);
+			id = makeArtifact(name, className, cf);
 		} catch (OperationException e) {
+			System.out.println("EPIC FAIL");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

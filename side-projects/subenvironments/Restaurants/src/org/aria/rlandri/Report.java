@@ -1,3 +1,4 @@
+package org.aria.rlandri;
 import cartago.AgentId;
 
 public class Report {

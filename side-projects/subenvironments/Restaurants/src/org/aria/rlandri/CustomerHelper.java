@@ -1,3 +1,4 @@
+package org.aria.rlandri;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,7 +32,9 @@ public class CustomerHelper extends Artifact {
 		tasteVector = new double[Restaurants.NUM_CUISINE];
 		for (int i = 0; i < Restaurants.NUM_CUISINE; i++) {
 			tasteVector[i] = Math.random();
+			
 		}
+		
 		// normalize taste vector
 		double sum = 0;
 		for (int i = 0; i < Restaurants.NUM_CUISINE; i++) {
@@ -39,7 +42,9 @@ public class CustomerHelper extends Artifact {
 		}
 		for (int i = 0; i < Restaurants.NUM_CUISINE; i++) {
 			tasteVector[i] /= sum;
+			//System.out.print(tasteVector[i]+" ");
 		}
+		//System.out.println();
 
 		eatFrequency = 0.5 + 0.5 * Math.random();
 
@@ -47,10 +52,10 @@ public class CustomerHelper extends Artifact {
 		serviceBias = Math.random() * 0.4;
 
 		satisfactionPoint = 0.1 + 0.7 * Math.random();
-		System.out.println("Satisfaction point: " + satisfactionPoint);
+		//System.out.println("Satisfaction point: " + satisfactionPoint);
 
 		tipPercentOfPrice = ((int) (Math.random() * 15)) / 100.0;
-		System.out.println("Generosity: " + tipPercentOfPrice);
+	//	System.out.println("Generosity: " + tipPercentOfPrice);
 	}
 
 	@OPERATION
@@ -178,7 +183,6 @@ public class CustomerHelper extends Artifact {
 
 	@OPERATION
 	private void storeRating(ArtifactId aid, int rating) {
-		System.out.println("Store!");
 		RestaurantInfo ri = restaurantsInfo.get(aid);
 		if (ri == null) {
 			ri = new RestaurantInfo();

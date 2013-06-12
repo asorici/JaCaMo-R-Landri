@@ -1,3 +1,4 @@
+package org.aria.rlandri;
 import cartago.AgentId;
 import cartago.Artifact;
 import cartago.LINK;
@@ -21,9 +22,9 @@ public class Restaurant extends Artifact {
 
 	private int currentStep = 0;
 
-	private ArrayList<ArrayList<Report>> reports = new ArrayList<ArrayList<Report>>();
+	protected ArrayList<ArrayList<Report>> reports = new ArrayList<ArrayList<Report>>();
 	{
-		// first one will be unused
+		// first period is unused so no reports are created
 		reports.add(new ArrayList<Report>());
 	}
 
@@ -34,14 +35,23 @@ public class Restaurant extends Artifact {
 		this.cuisine = cuisine;
 
 		this.price = Math.random() * Restaurants.MAX_PRICE;
-		this.service = Math.random() * Restaurants.MAX_SERVICE;
-		this.quality = Math.random() * Restaurants.MAX_QUALITY;
+		while (true) {
+			this.service = Math.random() * Restaurants.MAX_SERVICE;
+			this.quality = Math.random() * Restaurants.MAX_QUALITY;
+			double serviceCost = Restaurants.PRICE_PER_UNIT_QUALITY * quality
+					+ Restaurants.PRICE_PER_UNIT_SERVICE * service;
+			double profit = Math.min(Math.random() * price,
+					Restaurants.MAX_PRICE - serviceCost);
+			if (price >= serviceCost + profit)
+				break;
+
+		}
 
 		System.out.println("this restaurant has cuisine " + cuisine);
 	}
 
 	@LINK
-	void payRent(String price, String currentStep) {
+	private final void payRent(String price, String currentStep) {
 		System.out.println("------" + price + "----" + currentStep);
 		double rentPrice = Double.parseDouble(price);
 		this.currentStep = Integer.parseInt(currentStep);
@@ -55,14 +65,14 @@ public class Restaurant extends Artifact {
 	}
 
 	@LINK
-	void getBalance(OpFeedbackParam<Double> balance) {
+	private final void getBalance(OpFeedbackParam<Double> balance) {
 		System.out.println("Restaurant " + getId().getName()
 				+ "Parameters are: " + price + "-" + service + "-" + quality);
 		balance.set(this.balance);
 	}
 
 	@OPERATION
-	public boolean change(double price, double service, double quality) {
+	private final boolean change(double price, double service, double quality) {
 		// if the restaurant is system controlled
 		if (owner == null)
 			return false;
@@ -77,14 +87,22 @@ public class Restaurant extends Artifact {
 		return true;
 	}
 
+	// this operation should be extended by user provided restaurant artifact
+	// that extends this one
 	@OPERATION
-	public void askPrice(OpFeedbackParam<Double> price) {
+	protected void changeBasedOnFeedback() {
+
+	}
+
+	@OPERATION
+	private final void askPrice(OpFeedbackParam<Double> price) {
 		price.set(this.price);
 	}
 
 	@OPERATION
-	public void serve(OpFeedbackParam<Double> price,
-			OpFeedbackParam<Double> service, OpFeedbackParam<Double> quality,
+	private final void serve(OpFeedbackParam<Double> price,
+			OpFeedbackParam<Double> service_quality,
+			OpFeedbackParam<Double> food_quality,
 			OpFeedbackParam<Integer> transactionId) {
 		System.out.println(getOpUserName() + "eats at restaurant owned by "
 				+ owner + " has cuisine" + cuisine);
@@ -94,8 +112,8 @@ public class Restaurant extends Artifact {
 		System.out.println("expense vs price " + expense + "--" + this.price);
 		balance -= expense;
 		price.set(this.price);
-		service.set(this.service);
-		quality.set(this.quality);
+		service_quality.set(this.service);
+		food_quality.set(this.quality);
 
 		AgentId id = getOpUserId();
 		Report newReport = new Report();
@@ -122,7 +140,7 @@ public class Restaurant extends Artifact {
 	}
 
 	@OPERATION
-	public void pay(double tip, int transactionId) {
+	private final void pay(double tip, int transactionId) {
 		balance += price;
 		balance += tip;
 		// System.out.println("New balance " + balance);
@@ -134,7 +152,7 @@ public class Restaurant extends Artifact {
 	}
 
 	@OPERATION
-	public void giveFeedback(int rating, int transactionId) {
+	private final void giveFeedback(int rating, int transactionId) {
 		Report rep = findReport(transactionId);
 		// System.out.println("REPORT!!!2: " + rep+" id: "+transactionId);
 		rep.setRating(rating);

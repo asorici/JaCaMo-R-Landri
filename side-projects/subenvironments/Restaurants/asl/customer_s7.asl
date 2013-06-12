@@ -24,31 +24,36 @@
 		?feedback(ANS);
 		.print("gives feedback: ",ANS);
 		
+		.random(MaxPrice);
+		+myMaxPrice(40+MaxPrice*80);
+		
 		//create custom name for CustomerHelper artifact
 		.my_name(Name);
 		.concat("ch",Name,CHName);
-		.print("NAME IS ",CHName);
-		makeArtifact(CHName,"CustomerHelper",[],CH).
+		makeArtifact(CHName,"org.aria.rlandri.CustomerHelper",[],CH).
 
 
 /* Skipping first turn so that the helper artifact can be built before */
 +startTurn(1) : true
 	<- true.
-		
-@turn[atomic]		
-+startTurn(CurrentStep)
-	<- .print("Period ",CurrentStep, " has started.");
-		decideEat(EAT);
-		if(EAT)
-		{
-		  decideCuisine(C);
-		 .print("I want to eat. I will eat ",C);
-		  //getRestaurant(C,Res);
-		  getRestaurants(C,Restaurants);
-		  decideRestaurant(Restaurants,Res,Name);
-		  serve(Price,Service,Quality,TransactionId)[artifact_id(Res)];
-		  .print("Params: ",Price,Service,Quality);
-		  computeUtility(Price,Service,Quality,Utility);
+
+@eatPlan[atomic]
++!eatPlan(Cuisine) : true
+  <- 
+	  getRestaurants(Cuisine,Restaurants);
+	  decideRestaurant(Restaurants,Res,Name);
+	  askPrice(Pr)[artifact_id(Res)];
+	  ?myMaxPrice(MaxPrice);
+	  if(Pr>MaxPrice)
+	  {
+	    .print("MAX PRICE ",MaxPrice);
+	    //!eatPlan(Cuisine);
+	  }
+	  else
+	  {
+	  	  serve(Price,Service,Quality,TransactionId)[artifact_id(Res)];
+	  	  .print("Params: ",Price,Service,Quality);
+	  	  computeUtility(Price,Service,Quality,Utility);
 		  .print("Utility is: ",Utility);
 		  computeTip(Utility,Price,Tip);
 		  .print("tip is ",Tip," for price ",Price);
@@ -59,13 +64,29 @@
 		  .print("Feedback: ",FB);
 		  if(FB==true)
 		  {
-		    .print("ajung aici");
 		  	giveFeedback(Stars,TransactionId)[artifact_id(Res)];
 		  	.print("I'm giving ",Stars," number of stars to ",Name);
 		   };
+	   }.
+		
+
+@decideEatPlan[atomic]
++!decideEatPlan
+    <- 
+    decideEat(EAT);
+		if(EAT)
+		{
+		  decideCuisine(C);
+		 .print("I want to eat. I will eat ",C);
+		 !eatPlan(C);
 		}
 		else
 		{
 		.print("I'm not hungry");
 		}.
+		
+@turn[atomic]		
++startTurn(CurrentStep)
+	<- .print("Period ",CurrentStep, " has started.");
+		!decideEatPlan.
 		

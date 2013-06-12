@@ -1,3 +1,4 @@
+package org.aria.rlandri;
 public class RestaurantInfo {
 
 	private double averageRating;

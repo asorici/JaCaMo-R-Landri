@@ -1,3 +1,4 @@
+package org.aria.rlandri;
 public class Helper {
 
 	public static double regulate(double value, double min, double max) {
