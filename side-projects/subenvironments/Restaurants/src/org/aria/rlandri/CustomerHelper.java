@@ -87,19 +87,19 @@ public class CustomerHelper extends Artifact {
 			OpFeedbackParam<Double> ut) {
 		// System.out.println("Params:  " + price + " :: " + service + " :: " +
 		// quality);
-		double randomS = 2 * (0.5 - Math.random()) * serviceBias;
-		double randomQ = 2 * (0.5 - Math.random()) * qualityBias;
+		double randomS = (0.5 - Math.random()) * serviceBias;
+		double randomQ = (0.5 - Math.random()) * qualityBias;
 		double perceivedService = Helper.regulate((1 + randomS) * service, 0,
-				Restaurants.MAX_SERVICE);
+				Restaurants.MAX_SERVICE_QUALITY);
 		double perceivedQuality = Helper.regulate((1 + randomQ) * quality, 0,
-				Restaurants.MAX_QUALITY);
-		System.out.println("real vs perceived: " + service + " "
-				+ perceivedService);
+				Restaurants.MAX_FOOD_QUALITY);
+		//System.out.println("real vs perceived: " + service + " "
+		//		+ perceivedService);
 
 		double utility = (Restaurants.MAX_PRICE - price)
 				/ Restaurants.MAX_PRICE + perceivedService
-				/ Restaurants.MAX_SERVICE + perceivedQuality
-				/ Restaurants.MAX_QUALITY;
+				/ Restaurants.MAX_SERVICE_QUALITY + perceivedQuality
+				/ Restaurants.MAX_FOOD_QUALITY;
 		utility /= 3;
 		ut.set(utility);
 	}
@@ -153,7 +153,6 @@ public class CustomerHelper extends Artifact {
 				prob[i] = 3 * 3;
 			} else {
 				prob[i] = ri.getAverageRating() * ri.getAverageRating();
-				System.out.println("~~~~~~~~~" + prob[i]);
 			}
 		}
 
@@ -163,7 +162,6 @@ public class CustomerHelper extends Artifact {
 		}
 		for (int i = 0; i < prob.length; i++) {
 			prob[i] /= sum;
-			System.out.println("prob: " + al.get(i) + "--" + prob[i]);
 		}
 
 		double r = Math.random();

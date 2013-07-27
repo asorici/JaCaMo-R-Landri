@@ -22,7 +22,7 @@
 			+feedback(false);
 		}
 		?feedback(ANS);
-		.print("gives feedback: ",ANS);
+		//.print("gives feedback: ",ANS);
 		
 		.random(MaxPrice);
 		+myMaxPrice(40+MaxPrice*80);
@@ -44,28 +44,23 @@
 	  decideRestaurant(Restaurants,Res,Name);
 	  askPrice(Pr)[artifact_id(Res)];
 	  ?myMaxPrice(MaxPrice);
-	  if(Pr>MaxPrice)
-	  {
-	    .print("MAX PRICE ",MaxPrice);
-	    //!eatPlan(Cuisine);
-	  }
-	  else
+	  if(Pr<MaxPrice)
 	  {
 	  	  serve(Price,Service,Quality,TransactionId)[artifact_id(Res)];
-	  	  .print("Params: ",Price,Service,Quality);
+	  	 // .print("Params: ",Price,Service,Quality);
 	  	  computeUtility(Price,Service,Quality,Utility);
-		  .print("Utility is: ",Utility);
+		  //.print("Utility is: ",Utility);
 		  computeTip(Utility,Price,Tip);
-		  .print("tip is ",Tip," for price ",Price);
+		 // .print("tip is ",Tip," for price ",Price);
 		  pay(Tip,TransactionId)[artifact_id(Res)];
 		  computeFeedback(Utility,Stars);
 		  storeRating(Res,Stars);
 		  ?feedback(FB);
-		  .print("Feedback: ",FB);
+		 // .print("Feedback: ",FB);
 		  if(FB==true)
 		  {
 		  	giveFeedback(Stars,TransactionId)[artifact_id(Res)];
-		  	.print("I'm giving ",Stars," number of stars to ",Name);
+		  //	.print("I'm giving ",Stars," stars to ",Name);
 		   };
 	   }.
 		
@@ -77,16 +72,13 @@
 		if(EAT)
 		{
 		  decideCuisine(C);
-		 .print("I want to eat. I will eat ",C);
+		// .print("I want to eat. I will eat ",C);
 		 !eatPlan(C);
-		}
-		else
-		{
-		.print("I'm not hungry");
 		}.
+		
 		
 @turn[atomic]		
 +startTurn(CurrentStep)
-	<- .print("Period ",CurrentStep, " has started.");
+	<- //.print("Period ",CurrentStep, " has started.");
 		!decideEatPlan.
 		

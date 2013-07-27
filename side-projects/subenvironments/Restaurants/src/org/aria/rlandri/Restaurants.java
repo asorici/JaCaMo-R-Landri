@@ -25,12 +25,12 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 
 	public static final int NUM_CUISINE = 5;
 
-	public static final double PRICE_PER_UNIT_SERVICE = 0.2;
-	public static final double PRICE_PER_UNIT_QUALITY = 0.2;
+	public static final double PRICE_PER_UNIT_SERVICE_QUALITY = 0.25;
+	public static final double PRICE_PER_UNIT_FOOD_QUALITY = 0.25;
 	public static final double RENT_PRICE = 100;
 	public static final double MAX_PRICE = 100;
-	public static final double MAX_SERVICE = 100;
-	public static final double MAX_QUALITY = 100;
+	public static final double MAX_SERVICE_QUALITY = 100;
+	public static final double MAX_FOOD_QUALITY = 100;
 
 	private final List<AgentId> order = new ArrayList<AgentId>();
 	private final HashMap<Integer, ArrayList<ArtifactId>> restaurantTable = new HashMap<Integer, ArrayList<ArtifactId>>();
@@ -146,7 +146,7 @@ public class Restaurants extends SimultaneouslyExecutedCoordinator {
 		for (Integer key : keys) {
 			ArrayList<ArtifactId> restaurants = restaurantTable.get(key);
 			for (ArtifactId restaurant : restaurants) {
-				execLinkedOp(restaurant, "payRent", "" + RENT_PRICE, ""
+				execLinkedOp(restaurant, "getRent", "" + RENT_PRICE, ""
 						+ currentStep);
 			}
 		}

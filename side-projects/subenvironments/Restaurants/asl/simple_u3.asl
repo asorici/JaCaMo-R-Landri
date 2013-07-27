@@ -16,7 +16,7 @@
 	<- 
 	   focus(R);
 	   //change(70,100,100).
-	   change(63,47,41).
+	   change(55,47,41).
 	   
 
 //skip first turn
@@ -26,7 +26,7 @@
 +startTurn(N)
 	<-	//getReportsInPeriod(N-1,Reports);
 	  .print("Signal received for start of Turn ",N);
-	  changeBasedOnFeedback.
+	 changeBasedOnFeedback.
 	
 	
 +!registration: true

@@ -1,17 +1,50 @@
 package org.aria.rlandri;
+
+import java.util.ArrayList;
+
 import cartago.AgentId;
 import cartago.Artifact;
 import cartago.LINK;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Restaurant extends Artifact {
 
-	private double price = 0.5;
-	private double service = 0.5;
-	private double quality = 0.5;
+	private double price = 5;
+	private double serviceQuality = 5;
+	private double foodQuality = 5;
+
+	protected double getPrice() {
+		return this.price;
+	}
+
+	protected double getServiceQuality() {
+		return this.serviceQuality;
+	}
+
+	protected double getFoodQuality() {
+		return this.foodQuality;
+	}
+
+	protected double getPricePerUnitFoodQuality() {
+		return Restaurants.PRICE_PER_UNIT_FOOD_QUALITY;
+	}
+
+	protected double getPricePerUnitServiceQuality() {
+		return Restaurants.PRICE_PER_UNIT_SERVICE_QUALITY;
+	}
+
+	protected double getMaxFoodQuality() {
+		return Restaurants.MAX_FOOD_QUALITY;
+	}
+
+	protected double getMaxServiceQuality() {
+		return Restaurants.MAX_SERVICE_QUALITY;
+	}
+
+	protected double getMaxPrice() {
+		return Restaurants.MAX_PRICE;
+	}
 
 	private AgentId owner;
 	private int cuisine;
@@ -28,6 +61,14 @@ public class Restaurant extends Artifact {
 		reports.add(new ArrayList<Report>());
 	}
 
+	public String getOwnerName() {
+		return owner.getAgentName();
+	}
+
+	public int getCuisine() {
+		return this.cuisine;
+	}
+
 	void init(AgentId owner, int cuisine) {
 		System.out.println("owner: " + owner);
 		// defineObsProperty("count", 0);
@@ -36,10 +77,12 @@ public class Restaurant extends Artifact {
 
 		this.price = Math.random() * Restaurants.MAX_PRICE;
 		while (true) {
-			this.service = Math.random() * Restaurants.MAX_SERVICE;
-			this.quality = Math.random() * Restaurants.MAX_QUALITY;
-			double serviceCost = Restaurants.PRICE_PER_UNIT_QUALITY * quality
-					+ Restaurants.PRICE_PER_UNIT_SERVICE * service;
+			this.serviceQuality = Math.random()
+					* Restaurants.MAX_SERVICE_QUALITY;
+			this.foodQuality = Math.random() * Restaurants.MAX_FOOD_QUALITY;
+			double serviceCost = Restaurants.PRICE_PER_UNIT_FOOD_QUALITY
+					* foodQuality + Restaurants.PRICE_PER_UNIT_SERVICE_QUALITY
+					* serviceQuality;
 			double profit = Math.min(Math.random() * price,
 					Restaurants.MAX_PRICE - serviceCost);
 			if (price >= serviceCost + profit)
@@ -51,8 +94,8 @@ public class Restaurant extends Artifact {
 	}
 
 	@LINK
-	private final void payRent(String price, String currentStep) {
-		System.out.println("------" + price + "----" + currentStep);
+	private final void getRent(String price, String currentStep) {
+		// System.out.println("------" + price + "----" + currentStep);
 		double rentPrice = Double.parseDouble(price);
 		this.currentStep = Integer.parseInt(currentStep);
 		balance -= rentPrice;
@@ -60,19 +103,20 @@ public class Restaurant extends Artifact {
 		ArrayList<Report> newDay = new ArrayList<Report>();
 		reports.add(newDay);
 
-		System.out.println("paying rent in step " + currentStep + " owner: "
-				+ owner);
+		// System.out.println("paying rent in step " + currentStep + " owner: "
+		// + owner);
 	}
 
 	@LINK
 	private final void getBalance(OpFeedbackParam<Double> balance) {
 		System.out.println("Restaurant " + getId().getName()
-				+ "Parameters are: " + price + "-" + service + "-" + quality);
+				+ "Parameters are: " + price + "-" + serviceQuality + "-"
+				+ foodQuality);
 		balance.set(this.balance);
 	}
 
 	@OPERATION
-	private final boolean change(double price, double service, double quality) {
+	protected final boolean change(double price, double service, double quality) {
 		// if the restaurant is system controlled
 		if (owner == null)
 			return false;
@@ -80,9 +124,11 @@ public class Restaurant extends Artifact {
 		if (!getOpUserId().getAgentName().equals(owner.getAgentName())) {
 			return false;
 		}
-		this.price = price;
-		this.service = service;
-		this.quality = quality;
+		this.price = Helper.regulate(price, 0, Restaurants.MAX_PRICE);
+		this.serviceQuality = Helper.regulate(service, 0,
+				Restaurants.MAX_SERVICE_QUALITY);
+		this.foodQuality = Helper.regulate(quality, 0,
+				Restaurants.MAX_FOOD_QUALITY);
 
 		return true;
 	}
@@ -104,16 +150,18 @@ public class Restaurant extends Artifact {
 			OpFeedbackParam<Double> service_quality,
 			OpFeedbackParam<Double> food_quality,
 			OpFeedbackParam<Integer> transactionId) {
-		System.out.println(getOpUserName() + "eats at restaurant owned by "
-				+ owner + " has cuisine" + cuisine);
+		// System.out.println(getOpUserName() + "eats at restaurant owned by "
+		// + owner + " has cuisine" + cuisine);
 
-		double expense = this.service * Restaurants.PRICE_PER_UNIT_SERVICE
-				+ this.quality * Restaurants.PRICE_PER_UNIT_QUALITY;
-		System.out.println("expense vs price " + expense + "--" + this.price);
+		double expense = this.serviceQuality
+				* Restaurants.PRICE_PER_UNIT_SERVICE_QUALITY + this.foodQuality
+				* Restaurants.PRICE_PER_UNIT_FOOD_QUALITY;
+		// System.out.println("expense vs price " + expense + "--" +
+		// this.price);
 		balance -= expense;
 		price.set(this.price);
-		service_quality.set(this.service);
-		food_quality.set(this.quality);
+		service_quality.set(this.serviceQuality);
+		food_quality.set(this.foodQuality);
 
 		AgentId id = getOpUserId();
 		Report newReport = new Report();
@@ -156,9 +204,9 @@ public class Restaurant extends Artifact {
 		Report rep = findReport(transactionId);
 		// System.out.println("REPORT!!!2: " + rep+" id: "+transactionId);
 		rep.setRating(rating);
-		System.out.println("completed report: " + rep.getRating() + " "
-				+ rep.getTip() + " " + rep.getTransactionId() + " "
-				+ rep.getAgentId());
+		// System.out.println("completed report: " + rep.getRating() + " "
+		// + rep.getTip() + " " + rep.getTransactionId() + " "
+		// + rep.getAgentId());
 	}
 
 }
